@@ -87,7 +87,7 @@
             </li>
             <li class="nav-item" sec:authorize="isAuthenticated()">
                 <a class="nav-link btn btn-outline-primary" th:href="@{/new-study}">
-                    <i class="fa fa-plus" aria-hidden="true"></i> 스터디 개설
+                    <i class="fa fa-plus" aria-hidden="true"></i> 새파티 만들기
                 </a>
             </li>
             <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
@@ -103,7 +103,7 @@
                         <span sec:authentication="name">Username</span>
                     </h6>
                     <a class="dropdown-item" th:href="@{'/profile/' + ${#authentication.name}}">프로필</a>
-                    <a class="dropdown-item" >스터디</a>
+                    <a class="dropdown-item" >파티 관리자</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#" th:href="@{'/settings/profile'}">설정</a>
                     <form class="form-inline my-2 my-lg-0" action="#" th:action="@{/logout}" method="post">
@@ -171,14 +171,14 @@
     <div class="row pt-4 text-left justify-content-center bg-light">
         <div class="col-6">
             <a href="#" class="text-decoration-none" th:href="@{'/study/' + ${study.path}}">
-                <span class="h2" th:text="${study.title}">스터디 이름</span>
+                <span class="h2" th:text="${study.title}">파티 이름</span>
             </a>
         </div>
         <div class="col-4 text-right justify-content-end">
                 <span th:if="${!study.published}"
                       class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="bottom"
-                      title="스터디 공개 준비중">
-                    <button class="btn btn-primary btn-sm" style="pointer-events: none;" type="button" disabled>DRAFT</button>
+                      title="등록 시 파티원을 모집할 수 있습니다">
+                    <button class="btn btn-primary btn-sm" style="pointer-events: none;" type="button" disabled>등록</button>
                 </span>
             <span th:if="${study.closed}"
                   class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="bottom" title="스터디 종료함">
@@ -191,7 +191,7 @@
             <span sec:authorize="isAuthenticated()" th:if="${study.isJoinable(#authentication.principal)}"
                   class="btn-group" role="group" aria-label="Basic example">
                     <a class="btn btn-primary" th:href="@{'/study/' + ${study.path} + '/join'}">
-                        스터디 가입
+                        파티 참가
                     </a>
                     <a class="btn btn-outline-primary" th:href="@{'/study/' + ${study.path} + '/members'}"
                        th:text="${study.members.size()}">1</a>
@@ -199,7 +199,7 @@
             <span sec:authorize="isAuthenticated()"
                   th:if="${!study.closed && study.isMember(#authentication.principal)}" class="btn-group" role="group">
                     <a class="btn btn-outline-warning" th:href="@{'/study/' + ${study.path} + '/leave'}">
-                        스터디 탈퇴
+                        파티 탈퇴
                     </a>
                     <a class="btn btn-outline-primary" th:href="@{'/study/' + ${study.path} + '/members'}"
                        th:text="${study.members.size()}">1</a>
@@ -286,7 +286,7 @@
         $(function () {
             $('#fullDescription').summernote({
                 fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Noto Sans KR', 'Merriweather'],
-                placeholder: '스터디의 목표, 일정, 진행 방식, 사용할 교재 또는 인터넷 강좌 그리고 모집중인 스터디원 등 스터디에 대해 자세히 적어 주세요.',
+                placeholder: '일정, 게임 진행 방식, 장소 소개 등 파티에 대한 정보를 자세히 적어 주세요.',
                 tabsize: 2,
                 height: 300
             });
